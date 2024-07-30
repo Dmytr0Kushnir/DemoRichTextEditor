@@ -1,0 +1,9 @@
+﻿<script src="~/DemosScripts/contextMenuCustomization.js"></script>
+@(Html.DevExpress().RichEdit("DemoRichEdit")
+    .Open("Documents/ContextMenu.docx")
+    .OnInit("onInit")
+    .OnCustomCommandExecuted("onCustomCommandExecuted")
+    .OnContextMenuShowing("onContextMenuShowing")
+    .Height(600)
+    .ConfirmOnLosingChanges(c => c.Enabled(false))
+)

@@ -1,0 +1,5 @@
+@(Html.DevExpress().RichEdit("DemoRichEdit")
+    .Height(600)
+    .ConfirmOnLosingChanges(c => c.Enabled(false))
+    .Open("Documents/Example.docx")
+)

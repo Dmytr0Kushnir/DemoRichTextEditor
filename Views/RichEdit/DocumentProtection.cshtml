@@ -1,0 +1,54 @@
+<script src="~/DemosScripts/documentProtection.js"></script>
+@(Html.DevExpress().RichEdit("DemoRichEdit")
+    .Open("Documents/DocumentProtection.docx")
+    .Ribbon(r => r
+        .Tabs(tabs => {
+            tabs.Add("Review")
+                .Items(items => {
+                    items.AddButton()
+                        .Text("Protect Document")
+                        .CommandName("protectDocument")
+                        .ShowText(true)
+                        .Icon("dxre-icon-ProtectDocument");
+                    items.AddButton()
+                        .Text("Unprotect Document")
+                        .CommandName("unprotectDocument")
+                        .ShowText(true)
+                        .Icon("dxre-icon-UnprotectDocument");
+                    items.AddSelectBox()
+                        .Width(280)
+                        .BeginGroup(true)
+                        .CommandName("user")
+                        .Value("lawyer@somecompany.com")
+                        .ShowClearButton(true)
+                        .Placeholder("Select user")
+                        .Items(i => i
+                            .Add("lawyer@somecompany.com", "lawyer@somecompany.com")
+                            .Add("projectmanager@somecompany.com", "projectmanager@somecompany.com")
+                            .Add("senior@somecompany.com", "senior@somecompany.com")
+                            .Add("novice@somecompany.com", "novice@somecompany.com")
+                        );
+                    items.AddToggleButton(true)
+                        .BeginGroup(true)
+                        .CommandName("highlightRanges")
+                        .Text("Highlight Ranges");
+                    items.AddColorBox()
+                        .CommandName("highlightColor")
+                        .Color("rgb(150, 200, 150)");
+                    items.AddToggleButton(true)
+                       .BeginGroup(true)
+                       .CommandName("showBrackets")
+                       .Text("Show Brackets");
+                    items.AddColorBox()
+                        .CommandName("bracketsColor")
+                        .Color("rgb(127, 127, 127)");
+                });
+        })
+    .ActiveTabIndex(7)
+    )
+    .OnDocumentLoaded("onDocumentLoaded")
+    .OnCustomCommandExecuted("onCustomCommandExecuted")
+    .Authentication(a => a.UserName("lawyer@somecompany.com"))
+    .Height(600)
+    .ConfirmOnLosingChanges(c => c.Enabled(false))
+)

@@ -1,0 +1,42 @@
+﻿<script src="~/DemosScripts/ribbonCustomization.js"></script>
+
+@(Html.DevExpress().RichEdit("DemoRichEdit")
+    .Ribbon(ribbon => ribbon
+        .Visible(true)
+        .ActiveTabIndex(1)
+        .Tabs(tabs => {
+            tabs.Clear();
+            tabs.AddHomeTab()
+                .Items(items => {
+                    items.Clear();
+                    items.AddUndoItem();
+                    items.AddRedoItem();
+                    items.AddFontNameItem();
+                    items.AddFontSizeItem();
+                    items.AddBoldItem().ShowText(true);
+                    items.AddItalicItem().ShowText(true);
+                    items.AddUnderlineItem().ShowText(true);
+                });
+            tabs.Add()
+                .Title("Email")
+                .Items(items => {
+                    items.AddButton()
+                        .Text("Insert Email Signature")
+                        .CommandName("insertEmailSignature")
+                        .ShowText(true)
+                        .Icon("user");
+                    items.AddButton()
+                        .Text("Send Email")
+                        .CommandName("sendEmail")
+                        .ShowText(true)
+                        .Icon("email");
+                    items.AddPrintDocumentItem().BeginGroup(true);
+                    items.AddDownloadDocumentItem();
+                });
+        })
+    )
+    .OnCustomCommandExecuted("onCustomCommandExecuted")
+    .OnDocumentLoaded("onDocumentLoaded")
+    .Height(600)
+    .ConfirmOnLosingChanges(c => c.Enabled(false))
+)

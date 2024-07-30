@@ -1,0 +1,12 @@
+@(Html.DevExpress().RichEdit("DemoRichEdit")
+    .Open("Documents/MailMergeTemplate.docx")
+    .MailMerge(m => m
+        .DataSource(SampleData.Companies)
+        .ViewMergedData(true)
+        .ActiveRecord(0)
+    )
+    .Ribbon(r => r.ActiveTabIndex(5))
+    .Height(600)
+    .ConfirmOnLosingChanges(c => c.Enabled(false))
+    .OnDocumentLoaded("function(s, e) { s.document.fields.updateAllFields(); }")
+)

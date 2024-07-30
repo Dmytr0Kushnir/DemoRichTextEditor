@@ -1,0 +1,19 @@
+﻿@(Html.DevExpress().RichEdit("DemoRichEdit")
+    .AutoCorrect(a => a
+        .CorrectTwoInitialCapitals(true)
+        .DetectUrls(true)
+        .EnableAutomaticNumbering(true)
+        .ReplaceTextAsYouType(true)
+        .ReplaceInfoCollectionSettings(s => {
+            s.CaseSensitive(true);
+            s.ReplaceInfoCollection(c => {
+                c.Add().What("(c)").With("©");
+                c.Add().What("wnwd").With("well-nourished, well-developed");
+                c.Add().What("pctus").With("Please do not hesitate to contact us again in case of any further questions.");
+            });
+        })
+    )
+    .Height(600)
+    .ConfirmOnLosingChanges(c => c.Enabled(false))
+    .Open("Documents/AutoCorrect.docx")
+)
